@@ -14,6 +14,7 @@ import {RootStackParamList} from '../../App';
 import {FavoritePeople} from '../../components/FavoritePeople';
 import {getPaginatedData} from '../../services/getPaginatedData';
 import {PersonData, ResponseData} from '../../types';
+import {PaginationButtons} from '../../components/PaginationsButtons';
 
 export function HomeScreen({
   navigation,
@@ -63,6 +64,13 @@ export function HomeScreen({
                 </TouchableOpacity>
               )}
               keyExtractor={person => person.url}
+            />
+
+            <PaginationButtons
+              currentPage={currentPage}
+              itemsPerPage={10}
+              totalAmountPage={totalPages}
+              onPageChange={setCurrentPage}
             />
           </View>
         )}
