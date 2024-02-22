@@ -12,6 +12,8 @@ import SplashScreen from 'react-native-splash-screen';
 import {HomeScreen} from './screens/HomeScreen';
 import {DetailsScreen} from './screens/DetailsScreen';
 import {RootStackParamList} from './types';
+import {Provider} from 'react-redux';
+import {store} from './redux/store';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
@@ -22,16 +24,18 @@ export default function App(): React.JSX.Element {
 
   return (
     <NavigationContainer>
-      <Stack.Navigator
-        initialRouteName="Home"
-        screenOptions={{headerShown: false}}>
-        <Stack.Screen
-          name="Home"
-          component={HomeScreen}
-          options={{title: ''}}
-        />
-        <Stack.Screen name="Details" component={DetailsScreen} />
-      </Stack.Navigator>
+      <Provider store={store}>
+        <Stack.Navigator
+          initialRouteName="Home"
+          screenOptions={{headerShown: false}}>
+          <Stack.Screen
+            name="Home"
+            component={HomeScreen}
+            options={{title: ''}}
+          />
+          <Stack.Screen name="Details" component={DetailsScreen} />
+        </Stack.Navigator>
+      </Provider>
     </NavigationContainer>
   );
 }
