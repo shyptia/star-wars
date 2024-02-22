@@ -28,7 +28,9 @@ export function PaginationButtons({
       </TouchableOpacity>
 
       <Text style={styles.pages}>
-        {`${startItem}-${endItem} of ${totalAmountPage}`}
+        {`${
+          totalAmountPage ? `${startItem}-${endItem}` : '0'
+        } of ${totalAmountPage}`}
       </Text>
 
       <TouchableOpacity

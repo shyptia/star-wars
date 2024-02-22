@@ -4,6 +4,7 @@ import {
   FlatList,
   SafeAreaView,
   StatusBar,
+  TextInput,
   View,
 } from 'react-native';
 import {styles} from './styles';
@@ -12,6 +13,7 @@ import {getPaginatedData} from '../../services/getPaginatedData';
 import {HomeScreenNavigationProp, PersonData, ResponseData} from '../../types';
 import {PersonListItem} from '../../components/PersonListItem';
 import {PaginationButtons} from '../../components/PaginationButtons';
+import {useDebounce} from '../../helpers/useDebounce';
 
 export function HomeScreen({
   navigation,
@@ -22,13 +24,16 @@ export function HomeScreen({
   const [isLoading, setIsLoading] = useState(false);
   const [people, setPeople] = useState<PersonData[]>([]);
   const [totalPages, setTotalPages] = useState(0);
+  const [name, setName] = useState('');
+  const debouncedName = useDebounce(name, 500);
 
   useEffect(() => {
     const getData = async () => {
       setIsLoading(true);
-      const response: ResponseData | undefined = await getPaginatedData(
-        currentPage,
-      );
+      const response: ResponseData | undefined = await getPaginatedData({
+        page: currentPage,
+        name: debouncedName,
+      });
 
       if (response) {
         setPeople(response.results);
@@ -39,39 +44,54 @@ export function HomeScreen({
     };
 
     getData();
-  }, [currentPage]);
+  }, [currentPage, debouncedName]);
+
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [debouncedName]);
 
   return (
     <SafeAreaView style={styles.safeAreaStyles}>
       <StatusBar barStyle="light-content" />
       <View style={styles.contentContainer}>
         <FavoritePeople />
-        {isLoading ? (
-          <ActivityIndicator size="large" color="#FFFFFF" />
-        ) : (
-          <View style={styles.listContainer}>
-            <FlatList
-              style={styles.list}
-              data={people}
-              renderItem={({item}) => (
-                <PersonListItem
-                  name={item.name}
-                  gender={item.gender}
-                  url={item.url}
-                  navigation={navigation}
-                />
-              )}
-              keyExtractor={person => person.url}
-            />
 
-            <PaginationButtons
-              currentPage={currentPage}
-              itemsPerPage={10}
-              totalAmountPage={totalPages}
-              onPageChange={setCurrentPage}
-            />
-          </View>
-        )}
+        <View style={styles.listContainer}>
+          <TextInput
+            style={styles.input}
+            onChangeText={setName}
+            value={name}
+            placeholder="Search"
+            placeholderTextColor="#909aa3"
+          />
+
+          {isLoading ? (
+            <ActivityIndicator size="large" color="#FFFFFF" />
+          ) : (
+            <>
+              <FlatList
+                style={styles.list}
+                data={people}
+                renderItem={({item}) => (
+                  <PersonListItem
+                    name={item.name}
+                    gender={item.gender}
+                    url={item.url}
+                    navigation={navigation}
+                  />
+                )}
+                keyExtractor={person => person.url}
+              />
+
+              <PaginationButtons
+                currentPage={currentPage}
+                itemsPerPage={10}
+                totalAmountPage={totalPages}
+                onPageChange={setCurrentPage}
+              />
+            </>
+          )}
+        </View>
       </View>
     </SafeAreaView>
   );
