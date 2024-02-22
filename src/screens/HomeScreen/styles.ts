@@ -6,10 +6,12 @@ export const styles = StyleSheet.create({
     backgroundColor: '#111827',
   },
   contentContainer: {
+    flex: 1,
     paddingVertical: 30,
     paddingHorizontal: 20,
   },
   listContainer: {
+    flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#292F38',
@@ -18,6 +20,5 @@ export const styles = StyleSheet.create({
   },
   list: {
     width: '100%',
-    height: 300,
   },
 });

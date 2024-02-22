@@ -8,6 +8,7 @@ import {getGenderColor} from './getGenderColor';
 export function PersonListItem({
   name,
   gender,
+  url,
   navigation,
 }: {
   name: string;
@@ -31,7 +32,7 @@ export function PersonListItem({
 
       <TouchableOpacity
         style={styles.container}
-        onPress={() => navigation.navigate('Details')}>
+        onPress={() => navigation.navigate('Details', {url})}>
         <Text style={styles.name}>{name}</Text>
 
         <Text style={[styles.gender, {color: getGenderColor(gender)}]}>
