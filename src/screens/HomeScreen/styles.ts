@@ -20,8 +20,4 @@ export const styles = StyleSheet.create({
     width: '100%',
     height: 300,
   },
-  item: {
-    padding: 10,
-    marginHorizontal: 16,
-  },
 });

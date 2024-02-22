@@ -4,22 +4,19 @@ import {
   FlatList,
   SafeAreaView,
   StatusBar,
-  Text,
-  TouchableOpacity,
   View,
 } from 'react-native';
 import {styles} from './styles';
-import {NativeStackScreenProps} from '@react-navigation/native-stack';
-import {RootStackParamList} from '../../App';
 import {FavoritePeople} from '../../components/FavoritePeople';
 import {getPaginatedData} from '../../services/getPaginatedData';
-import {PersonData, ResponseData} from '../../types';
-import {PaginationButtons} from '../../components/PaginationsButtons';
+import {HomeScreenNavigationProp, PersonData, ResponseData} from '../../types';
+import {PersonListItem} from '../../components/PersonListItem';
+import {PaginationButtons} from '../../components/PaginationButtons';
 
 export function HomeScreen({
   navigation,
 }: {
-  navigation: NativeStackScreenProps<RootStackParamList, 'Home'>['navigation'];
+  navigation: HomeScreenNavigationProp;
 }) {
   const [currentPage, setCurrentPage] = useState(1);
   const [isLoading, setIsLoading] = useState(false);
@@ -57,11 +54,12 @@ export function HomeScreen({
               style={styles.list}
               data={people}
               renderItem={({item}) => (
-                <TouchableOpacity
-                  onPress={() => navigation.navigate('Details')}
-                  style={styles.item}>
-                  <Text>{item.name}</Text>
-                </TouchableOpacity>
+                <PersonListItem
+                  name={item.name}
+                  gender={item.gender}
+                  url={item.url}
+                  navigation={navigation}
+                />
               )}
               keyExtractor={person => person.url}
             />

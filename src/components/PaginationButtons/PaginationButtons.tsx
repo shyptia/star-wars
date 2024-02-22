@@ -24,7 +24,7 @@ export function PaginationButtons({
       <TouchableOpacity
         disabled={isFirstPage}
         onPress={() => onPageChange(page => page - 1)}>
-        <LeftArrowSvg color={isFirstPage ? '#3B4147' : '#FFFFFF'} />
+        <LeftArrowSvg color={isFirstPage ? '#51585e' : '#FFFFFF'} />
       </TouchableOpacity>
 
       <Text style={styles.pages}>
@@ -35,7 +35,7 @@ export function PaginationButtons({
         disabled={isLastPage}
         onPress={() => onPageChange(page => page + 1)}
         style={[]}>
-        <RightArrowSvg color={isLastPage ? '#3B4147' : '#FFFFFF'} />
+        <RightArrowSvg color={isLastPage ? '#51585e' : '#FFFFFF'} />
       </TouchableOpacity>
     </View>
   );

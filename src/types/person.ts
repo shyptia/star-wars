@@ -1,4 +1,4 @@
-type Gender = 'male' | ' female' | 'n/a';
+export type Gender = 'male' | 'female' | 'n/a';
 
 export type PersonData = {
   name: string;

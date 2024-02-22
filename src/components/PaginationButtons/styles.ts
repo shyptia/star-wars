@@ -5,6 +5,7 @@ export const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     gap: 15,
+    marginTop: 15,
   },
   pages: {
     color: '#FFFFFF',

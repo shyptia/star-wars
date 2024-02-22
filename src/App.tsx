@@ -11,11 +11,7 @@ import React, {useEffect} from 'react';
 import SplashScreen from 'react-native-splash-screen';
 import {HomeScreen} from './screens/HomeScreen';
 import {DetailsScreen} from './screens/DetailsScreen';
-
-export type RootStackParamList = {
-  Home: undefined;
-  Details: undefined;
-};
+import {RootStackParamList} from './types';
 
 const Stack = createNativeStackNavigator<RootStackParamList>();
 
