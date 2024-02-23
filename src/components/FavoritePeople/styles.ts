@@ -4,7 +4,7 @@ export const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
     gap: 10,
-    marginBottom: 20,
+    marginBottom: 10,
     justifyContent: 'space-between',
     alignItems: 'center',
   },
@@ -26,5 +26,17 @@ export const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 18,
     fontWeight: '500',
+  },
+  resetButton: {
+    alignSelf: 'flex-end',
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginBottom: 10,
+    backgroundColor: '#292F38',
+    borderRadius: 10,
+  },
+  resetButtonText: {
+    color: '#FFFFFF',
+    fontWeight: '700',
   },
 });

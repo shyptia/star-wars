@@ -22,10 +22,13 @@ const selectedPeopleSlice = createSlice({
         person => person.id !== action.payload,
       );
     },
+    resetSelectedPeople(state) {
+      state.selectedPeople = [];
+    },
   },
 });
 
-export const {addSelectedPerson, removeSelectedPerson} =
+export const {addSelectedPerson, removeSelectedPerson, resetSelectedPeople} =
   selectedPeopleSlice.actions;
 
 export default selectedPeopleSlice.reducer;
